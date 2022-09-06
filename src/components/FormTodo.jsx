@@ -1,18 +1,15 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { add } from '../store/todosSlice';
 
-const FormTodo = ({ todos, setTodos }) => {
-    const [text, setText] = useState('')
+const FormTodo = () => {
+    const [text, setText] = useState('');
+    const dispatch = useDispatch();
+
     const handleAdd = (e) => {
         e.preventDefault();
-        if (text.trim() !== '') {
-            setTodos([
-                ...todos,
-                {
-                    id: Date.now().toString(),
-                    body: text,
-                    completed: false
-                }
-            ]);
+        if (text.trim().length) {
+            dispatch(add({ text }));
             setText('');
         }
     }

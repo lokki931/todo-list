@@ -1,20 +1,22 @@
-import React from 'react'
+import { useDispatch } from 'react-redux';
+import { toggle, remove } from '../store/todosSlice';
 
-const ItemTodo = ({ todo, handleRemove, handleCompleted }) => {
+const ItemTodo = ({ id, body, completed }) => {
+    const dispatch = useDispatch();
     return (
         <li className='list-group-item d-flex justify-content-between'>
             <input
                 className='form-check-input me-2'
                 type="checkbox"
-                checked={todo.completed}
-                onChange={() => handleCompleted(todo.id)}
+                checked={completed}
+                onChange={() => dispatch(toggle({ id }))}
             />
-            <span className='me-auto'>{todo.body}</span>
+            <span className='me-auto'>{body}</span>
             <button
                 type="button"
                 className='btn-close'
                 aria-label="Close"
-                onClick={() => handleRemove(todo.id)}
+                onClick={() => dispatch(remove({ id }))}
             ></button>
         </li>
     )
