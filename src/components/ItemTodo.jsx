@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import { useDispatch } from 'react-redux';
 import { toggle, remove, save } from '../store/todosSlice';
+import { FaEdit, FaSave } from 'react-icons/fa';
 
 const ItemTodo = ({ id, body, completed }) => {
   const [edit, setEdit] = useState(null);
@@ -34,15 +35,18 @@ const ItemTodo = ({ id, body, completed }) => {
           />
 
           <button type="button" className="btn btn-success" onClick={() => saveChange(id)}>
-            save
+            <FaSave />
           </button>
         </div>
       ) : (
         <>
           <span className="me-auto">{body}</span>
-          <button type="button" className="btn btn-primary" onClick={() => editMode(id, body)}>
-            edit
-          </button>
+          <FaEdit
+            role="button"
+            className="text-secondary cursor"
+            onClick={() => editMode(id, body)}
+          />
+
           <button
             type="button"
             className="btn-close"
