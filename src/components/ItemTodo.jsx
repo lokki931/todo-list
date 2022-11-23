@@ -13,8 +13,13 @@ const ItemTodo = ({ id, body, completed }) => {
     setText(body);
   };
   const saveChange = (id) => {
-    dispatch(save({ id, text }));
-    setEdit(null);
+    if (text.trim() !== '') {
+      dispatch(save({ id, text }));
+      setEdit(null);
+    } else {
+      alert('input for edit is empty');
+      setEdit(null);
+    }
   };
 
   return (
