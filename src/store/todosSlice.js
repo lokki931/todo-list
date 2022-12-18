@@ -8,11 +8,15 @@ export const todosSlice = createSlice({
   initialState,
   reducers: {
     add: (state, action) => {
-      state.todos.push({
+      let newTodo = {
         id: new Date().toISOString(),
         body: action.payload.text,
         completed: false,
-      });
+      };
+      return {
+        ...state,
+        todos: [...state.todos, newTodo],
+      };
     },
     toggle: (state, action) => {
       const toggledTodo = state.todos.find((todo) => todo.id === action.payload.id);
