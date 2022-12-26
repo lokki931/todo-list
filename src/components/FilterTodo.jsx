@@ -16,19 +16,22 @@ let filterBtns = [
 ];
 
 const FilterTodo = ({ todos, setFilterTodos, activeFilterTodos, setActiveFilterTodos }) => {
+  const filterFn = (id, from, to) => {
+    setFilterTodos({
+      todos: todos.filter((el) => el.completed === from || el.completed === to),
+    });
+    setActiveFilterTodos(id);
+  };
   const filter = (el) => {
     switch (el.name) {
       case 'completed':
-        setFilterTodos({ todos: todos.filter((el) => el.completed === true) });
-        setActiveFilterTodos(el.id);
+        filterFn(el.id, true, true);
         break;
       case 'uncompleted':
-        setFilterTodos({ todos: todos.filter((el) => el.completed === false) });
-        setActiveFilterTodos(el.id);
+        filterFn(el.id, false, false);
         break;
       default:
-        setFilterTodos({ todos });
-        setActiveFilterTodos(1);
+        filterFn(1, true, false);
         break;
     }
   };
